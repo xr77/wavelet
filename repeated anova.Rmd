@@ -1,0 +1,38 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+df<-read.csv("~/Desktop/Project1/subjects/repeatedANOVA.csv")
+df
+```
+
+```{r}
+#install.packages("lme4")
+library(lmerTest)
+#library(lme4)
+
+fit <- lmer(Score ~ Animal * Levels + (1|Sub_ID), data=df)
+anova(fit)
+```
+
+
+```{r}
+#install.packages("lmerTest")
+#library(lmerTest)
+#install.packages("psycho")
+
+library(psycho)
+results <- get_contrasts(fit, "Animal * Levels",adjust = "none")
+results
+```
+```{r}
+# install.packages("quantreg")
+# install.packages("psycho")
+```
+
